@@ -5,54 +5,54 @@ import { addTodo } from "../redux/Slices/TodoSlice";
 import "../Styles/global.css";
 
 const AddTodo = () => {
-  const [desc, setDesc] = useState<string>(""); // Manages the input field state
+  const [desc, setDesc] = useState<string>(""); // MANAGES THE INPUT FIELD STATE
   const dispatch = useDispatch();
 
-  // Load todos from localStorage on mount
+  // LOAD TODOS FROM LOCALSTORAGE ON MOUNT
   useEffect(() => {
     const storedTodos = localStorage.getItem("todos");
     if (storedTodos) {
       const todosArray = JSON.parse(storedTodos);
       todosArray.forEach((todo: any) => {
-        dispatch(addTodo(todo)); // Dispatching the full todo object with id and completed
+        dispatch(addTodo(todo)); // DISPATCHING THE FULL TODO OBJECT WITH ID AND COMPLETED
       });
     }
   }, [dispatch]);
 
-  // Handle form submission
+  // HANDLE FORM SUBMISSION
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (desc.trim() === "") {
       alert("Description can't be empty 📪");
     } else {
-      const newTodo = { id: Math.random(), desc, completed: false }; // Creating a full todo object
+      const newTodo = { id: Math.random(), desc, completed: false }; // CREATING A FULL TODO OBJECT
 
-      dispatch(addTodo(newTodo)); // Dispatch the full todo object to Redux
+      dispatch(addTodo(newTodo)); // DISPATCH THE FULL TODO OBJECT TO REDUX
 
-      // Get current todos from localStorage
+      // GET CURRENT TODOS FROM LOCALSTORAGE
       const storedTodos = localStorage.getItem("todos");
       const todosArray = storedTodos ? JSON.parse(storedTodos) : [];
 
-      // Add new todo to localStorage (store full object)
+      // ADD NEW TODO TO LOCALSTORAGE (STORE FULL OBJECT)
       todosArray.push(newTodo);
       localStorage.setItem("todos", JSON.stringify(todosArray));
 
-      setDesc(""); // Clear input field after adding
+      setDesc(""); // CLEAR INPUT FIELD AFTER ADDING
     }
   };
 
-  // Return JSX template
+  // RETURN JSX TEMPLATE
   return (
     <form onSubmit={handleFormSubmit}>
       <input
         type="text"
         value={desc}
-        onChange={(e) => setDesc(e.target.value)}
+        onChange={(e) => setDesc(e.target.value)} // UPDATE INPUT FIELD STATE
         name="todo"
         id="todo"
-        placeholder="Enter your todo"
+        placeholder="Enter your todo" // INPUT PLACEHOLDER
       />
-      <button type="submit">Add Todo</button>
+      <button type="submit">Add Todo</button> {/* BUTTON TO ADD TODO */}
     </form>
   );
 };

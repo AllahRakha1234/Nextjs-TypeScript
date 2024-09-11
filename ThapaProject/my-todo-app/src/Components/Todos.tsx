@@ -2,26 +2,30 @@
 import React, { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteTodo, toggleTodoActivity, Todo } from "../redux/Slices/TodoSlice";
+import {
+  deleteTodo,
+  toggleTodoActivity,
+  Todo,
+} from "../redux/Slices/TodoSlice";
 import "../app/page.module.css";
 
 const Todos = () => {
   const searchParams = useSearchParams();
   const query = searchParams.get("todos");
 
-  const todos = useSelector((state: any) => state.todos); // Access the todos from the Redux store
+  const todos = useSelector((state: any) => state.todos); // ACCESS THE TODOS FROM THE REDUX STORE
   const dispatch = useDispatch();
   let filterData = todos;
 
   const handleCheckBoxTodoBtn = (id: number) => {
-    dispatch(toggleTodoActivity(id)); // Dispatch action to toggle `completed` state
+    dispatch(toggleTodoActivity(id)); // DISPATCH ACTION TO TOGGLE `COMPLETED` STATE
   };
 
   const handleDeleteTodoBtn = (id: number) => {
-    dispatch(deleteTodo(id)); // Dispatch action to delete a todo
+    dispatch(deleteTodo(id)); // DISPATCH ACTION TO DELETE A TODO
   };
 
-  // Filter the todos based on the query
+  // FILTER THE TODOS BASED ON THE QUERY
   if (query === "active") {
     filterData = todos.filter((todo: Todo) => todo.completed === false);
   }
@@ -30,12 +34,12 @@ const Todos = () => {
     filterData = todos.filter((todo: Todo) => todo.completed === true);
   }
 
-  // Sync todos to localStorage whenever the `todos` state changes
+  // SYNC TODOS TO LOCALSTORAGE WHENEVER THE `TODOS` STATE CHANGES
   useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos)); // Save todos to localStorage
-  }, [todos]); // Trigger this effect when `todos` changes
+    localStorage.setItem("todos", JSON.stringify(todos)); // SAVE TODOS TO LOCALSTORAGE
+  }, [todos]); // TRIGGER THIS EFFECT WHEN `TODOS` CHANGES
 
-  // Return JSX
+  // RETURN JSX
   return (
     <div>
       <ul className="main-task">
@@ -60,7 +64,7 @@ const Todos = () => {
                     }}
                     className="btn"
                   >
-                    Delete
+                    DELETE
                   </button>
                 )}
               </li>

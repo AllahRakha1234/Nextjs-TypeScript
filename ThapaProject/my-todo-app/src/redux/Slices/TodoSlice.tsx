@@ -15,6 +15,7 @@ const todosSlice = createSlice({
   name: "todos", // Name of the store
   initialState, // Initial state of the store
   reducers: {
+    
     // Adding full todo object instead of just description
     addTodo: (state, action: PayloadAction<Todo>) => {
       state.push(action.payload);
