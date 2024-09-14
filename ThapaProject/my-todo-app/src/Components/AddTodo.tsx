@@ -4,6 +4,13 @@ import { useDispatch } from "react-redux";
 import { addTodo } from "../redux/Slices/TodoSlice";
 import "../Styles/global.css";
 
+interface TodoType {
+  id: number;
+  desc: string;
+  completed: boolean;
+};
+
+// ADD TODO COMPONENT
 const AddTodo = () => {
   const [desc, setDesc] = useState<string>(""); // MANAGES THE INPUT FIELD STATE
   const dispatch = useDispatch();
@@ -13,7 +20,7 @@ const AddTodo = () => {
     const storedTodos = localStorage.getItem("todos");
     if (storedTodos) {
       const todosArray = JSON.parse(storedTodos);
-      todosArray.forEach((todo: any) => {
+      todosArray.forEach((todo: TodoType) => {
         dispatch(addTodo(todo)); // DISPATCHING THE FULL TODO OBJECT WITH ID AND COMPLETED
       });
     }

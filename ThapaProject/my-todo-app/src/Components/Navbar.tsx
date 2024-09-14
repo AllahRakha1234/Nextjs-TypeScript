@@ -6,7 +6,7 @@ import "../app/page.module.css"
 const Navbar = () => {
 
   const searchParams = useSearchParams();
-  let todosData = searchParams.get("todos");
+  const todosData = searchParams.get("todos");
 
   return (
     <nav>
