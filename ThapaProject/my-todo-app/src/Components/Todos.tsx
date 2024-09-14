@@ -4,16 +4,23 @@ import { useSearchParams } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import {
   deleteTodo,
-  toggleTodoActivity,
-  Todo,
+  toggleTodoActivity
 } from "../redux/Slices/TodoSlice";
 import "../app/page.module.css";
 
+interface TodoType {
+  id: number;
+  desc: string;
+  completed: boolean;
+};
+
+
+// TODOS COMPONENT
 const Todos = () => {
   const searchParams = useSearchParams();
   const query = searchParams.get("todos");
 
-  const todos = useSelector((state: any) => state.todos); // ACCESS THE TODOS FROM THE REDUX STORE
+  const todos = useSelector((state: TodoType[]) => state.todos); // ACCESS THE TODOS FROM THE REDUX STORE
   const dispatch = useDispatch();
   let filterData = todos;
 
@@ -27,11 +34,11 @@ const Todos = () => {
 
   // FILTER THE TODOS BASED ON THE QUERY
   if (query === "active") {
-    filterData = todos.filter((todo: Todo) => todo.completed === false);
+    filterData = todos.filter((todo: TodoType) => todo.completed === false);
   }
 
   if (query === "completed") {
-    filterData = todos.filter((todo: Todo) => todo.completed === true);
+    filterData = todos.filter((todo: TodoType) => todo.completed === true);
   }
 
   // SYNC TODOS TO LOCALSTORAGE WHENEVER THE `TODOS` STATE CHANGES
@@ -44,7 +51,7 @@ const Todos = () => {
     <div>
       <ul className="main-task">
         {filterData.length !== 0 ? (
-          filterData.map((todo: Todo) => {
+          filterData.map((todo: TodoType) => {
             return (
               <li key={todo.id}>
                 <input
