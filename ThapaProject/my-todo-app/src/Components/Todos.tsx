@@ -24,7 +24,7 @@ const Todos = () => {
   const searchParams = useSearchParams();
   const query = searchParams.get("todos");
 
-  const todos = useSelector((state: RootState) => state.todos); // ACCESS THE TODOS FROM THE REDUX STORE
+  const todos = useSelector((state: any) => state.todos); // ACCESS THE TODOS FROM THE REDUX STORE
   const dispatch = useDispatch();
   let filterData = todos;
 
