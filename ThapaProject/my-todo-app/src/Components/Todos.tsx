@@ -14,13 +14,17 @@ interface TodoType {
   completed: boolean;
 };
 
+interface RootState {
+  todos: TodoType[];
+}
+
 
 // TODOS COMPONENT
 const Todos = () => {
   const searchParams = useSearchParams();
   const query = searchParams.get("todos");
 
-  const todos = useSelector((state: TodoType[]) => state.todos); // ACCESS THE TODOS FROM THE REDUX STORE
+  const todos = useSelector((state: RootState) => state.todos); // ACCESS THE TODOS FROM THE REDUX STORE
   const dispatch = useDispatch();
   let filterData = todos;
 
@@ -66,6 +70,7 @@ const Todos = () => {
                 {todo.completed && (
                   <button
                     type="button"
+                    aria-label={`Delete ${todo.desc}`}
                     onClick={() => {
                       handleDeleteTodoBtn(todo.id);
                     }}
