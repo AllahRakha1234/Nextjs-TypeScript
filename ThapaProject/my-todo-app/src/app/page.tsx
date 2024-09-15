@@ -1,9 +1,12 @@
 "use client";
 import React, { Suspense } from 'react';
+import dynamic from 'next/dynamic';
 import AddTodo from '../Components/AddTodo';
-import Navbar from '../Components/Navbar';
-import Todos from '../Components/Todos';
 import "../Styles/global.css";
+
+// Dynamically import Navbar and Todos
+const Navbar = dynamic(() => import('../Components/Navbar'), { ssr: false });
+const Todos = dynamic(() => import('../Components/Todos'), { ssr: false });
 
 const Page = () => {
   return (
