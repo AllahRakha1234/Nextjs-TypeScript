@@ -13,10 +13,6 @@ interface TodoType {
   completed: boolean;
 };
 
-interface RootState {
-  todos: TodoType[];
-}
-
 
 // TODOS COMPONENT
 const Todos = () => {
