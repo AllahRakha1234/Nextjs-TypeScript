@@ -1,4 +1,3 @@
-import localFont from "next/font/local";
 import Navbar from '../components/Navbar';
 import AddTodo from '../components/AddTodo';
 import Todos from './../components/Todos';
