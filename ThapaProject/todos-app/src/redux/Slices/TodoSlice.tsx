@@ -18,7 +18,7 @@ const todosSlice = createSlice({
     
     // Adding full todo object instead of just description
     addTodo: (state, action: PayloadAction<Todo>) => {
-      state.push(action.payload);
+      state.unshift(action.payload);
     },
 
     // To toggle completed status
